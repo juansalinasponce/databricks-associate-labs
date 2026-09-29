@@ -1,0 +1,3 @@
+{"id_siniestro":"SIN-001","id_poliza":"POL-001","fecha_reporte":"2026-09-14","estado_siniestro":"EN_EVALUACION","monto_reclamado":4500.00,"moneda":"PEN"}
+{"id_siniestro":"SIN-002","id_poliza":"POL-002","fecha_reporte":"2026-09-14","estado_siniestro":"APROBADO","monto_reclamado":1800.00,"moneda":"PEN"}
+{"id_siniestro":"SIN-003","id_poliza":"POL-004","fecha_reporte":"2026-09-14","estado_siniestro":"REPORTADO","monto_reclamado":3200.50,"moneda":"PEN"}

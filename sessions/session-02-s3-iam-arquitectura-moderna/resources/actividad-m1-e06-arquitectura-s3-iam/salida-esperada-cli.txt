@@ -1,0 +1,24 @@
+$ aws --version
+aws-cli/2.x.x Python/3.x.x Darwin_or_Linux/...
+
+$ aws sts get-caller-identity
+{
+    "UserId": "<USER_ID>",
+    "Account": "<AWS_ACCOUNT_ID>",
+    "Arn": "arn:aws:sts::<AWS_ACCOUNT_ID>:assumed-role/<TRAINING_ROLE>/<SESSION>"
+}
+
+$ aws s3 mb s3://<S3_BUCKET> --region <AWS_REGION>
+make_bucket: <S3_BUCKET>
+
+$ aws s3 cp datos/landing/polizas/polizas_2026_09_14.csv s3://<S3_BUCKET>/landing/polizas/
+upload: datos/landing/polizas/polizas_2026_09_14.csv to s3://<S3_BUCKET>/landing/polizas/polizas_2026_09_14.csv
+
+$ aws s3 sync datos/landing s3://<S3_BUCKET>/landing/
+upload: datos/landing/pagos/pagos_2026_09_14.csv to s3://<S3_BUCKET>/landing/pagos/pagos_2026_09_14.csv
+upload: datos/landing/siniestros/siniestros_2026_09_14.json to s3://<S3_BUCKET>/landing/siniestros/siniestros_2026_09_14.json
+
+$ aws s3 ls s3://<S3_BUCKET>/landing/ --recursive
+2026-09-14 20:10:01        316 landing/pagos/pagos_2026_09_14.csv
+2026-09-14 20:09:45        463 landing/polizas/polizas_2026_09_14.csv
+2026-09-14 20:10:02        453 landing/siniestros/siniestros_2026_09_14.json
