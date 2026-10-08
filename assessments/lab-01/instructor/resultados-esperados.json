@@ -1,0 +1,75 @@
+{
+  "fecha_corte": "2026-09-30",
+  "filas_entrada": 500,
+  "filas_salida": 475,
+  "duplicados_exactos_eliminados": 25,
+  "canales_vacios_entrada": 65,
+  "canales_sin_informacion_salida": 40,
+  "vigentes": 78,
+  "no_vigentes": 397,
+  "resumen_vigentes": [
+    {
+      "id_producto": "PROD-SALUD",
+      "moneda": "PEN",
+      "cantidad_polizas": 22,
+      "prima_total": "76900.69",
+      "prima_promedio": "3495.49"
+    },
+    {
+      "id_producto": "PROD-VIAJE",
+      "moneda": "PEN",
+      "cantidad_polizas": 13,
+      "prima_total": "45443.75",
+      "prima_promedio": "3495.67"
+    },
+    {
+      "id_producto": "PROD-VIDA",
+      "moneda": "PEN",
+      "cantidad_polizas": 13,
+      "prima_total": "45441.63",
+      "prima_promedio": "3495.51"
+    },
+    {
+      "id_producto": "PROD-HOGAR",
+      "moneda": "PEN",
+      "cantidad_polizas": 10,
+      "prima_total": "34891.50",
+      "prima_promedio": "3489.15"
+    },
+    {
+      "id_producto": "PROD-AUTO",
+      "moneda": "PEN",
+      "cantidad_polizas": 9,
+      "prima_total": "31486.62",
+      "prima_promedio": "3498.51"
+    },
+    {
+      "id_producto": "PROD-SALUD",
+      "moneda": "USD",
+      "cantidad_polizas": 5,
+      "prima_total": "17474.90",
+      "prima_promedio": "3494.98"
+    },
+    {
+      "id_producto": "PROD-AUTO",
+      "moneda": "USD",
+      "cantidad_polizas": 3,
+      "prima_total": "10484.94",
+      "prima_promedio": "3494.98"
+    },
+    {
+      "id_producto": "PROD-HOGAR",
+      "moneda": "USD",
+      "cantidad_polizas": 3,
+      "prima_total": "10408.62",
+      "prima_promedio": "3469.54"
+    }
+  ],
+  "producto_lider_pen": {
+    "id_producto": "PROD-SALUD",
+    "moneda": "PEN",
+    "cantidad_polizas": 22,
+    "prima_total": "76900.69",
+    "prima_promedio": "3495.49"
+  }
+}
