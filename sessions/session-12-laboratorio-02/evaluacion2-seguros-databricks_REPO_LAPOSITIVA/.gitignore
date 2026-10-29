@@ -1,0 +1,13 @@
+# Datos: viven en el Volume/S3, no en Git
+*.csv
+data/
+datasets/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Databricks / tooling local
+.databricks/
+dist/

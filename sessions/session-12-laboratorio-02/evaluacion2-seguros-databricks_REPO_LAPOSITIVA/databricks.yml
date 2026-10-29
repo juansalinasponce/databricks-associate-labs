@@ -1,0 +1,22 @@
+bundle:
+  name: evaluacion2-seguros-databricks
+
+include:
+  - resources/*.yml
+
+variables:
+  catalog:
+    description: Catalog de la evaluación
+    default: workspace
+
+  volume_base:
+    description: Ruta base del Volume
+    default: /Volumes/workspace/bronze/lapositiva/evaluacion2
+
+targets:
+  dev:
+    mode: development
+    default: true
+    variables:
+      catalog: workspace
+      volume_base: /Volumes/workspace/bronze/lapositiva/evaluacion2

@@ -1,0 +1,11 @@
+resources:
+  pipelines:
+    eval2_gold:
+      name: PIPELINE_EVAL2_GOLD
+      catalog: ${var.catalog}
+      schema: gold
+      serverless: true
+      continuous: false
+      libraries:
+        - glob:
+            include: ../src/03_gold_pipeline_eval2.sql
