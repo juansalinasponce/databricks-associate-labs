@@ -1,0 +1,7 @@
+id_poliza,estado_poliza,prima
+POL001,activa,1200.00
+POL002,vencida,800.00
+POL001,activa,1200.00
+POL003,activa,-50.00
+POL004,ACTIVA,1000.00
+POL005, activa ,500.00

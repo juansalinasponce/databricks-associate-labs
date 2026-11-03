@@ -1,0 +1,53 @@
+bundle:
+  name: sesion13-polizas
+
+variables:
+  catalog:
+    description: Catálogo existente donde puedes crear schemas y tablas.
+    default: workspace
+  participante:
+    description: Identificador propio, en minúsculas, sin espacios ni tildes.
+    default: alumno01
+
+# Cada participante y target conserva sus propios archivos y estado de despliegue.
+workspace:
+  root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
+
+# La muestra se carga manualmente en un Volume; no se despliega con el código.
+sync:
+  exclude:
+    - data/**
+
+resources:
+  jobs:
+    polizas_etl:
+      name: s13_${var.participante}_${bundle.target}_polizas
+      max_concurrent_runs: 1
+      queue:
+        enabled: true
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
+        - name: participante
+          default: ${var.participante}
+        - name: ambiente
+          default: ${bundle.target}
+      tasks:
+        - task_key: bronze
+          notebook_task:
+            notebook_path: ./src/01-bronze.py
+        - task_key: silver
+          depends_on:
+            - task_key: bronze
+          notebook_task:
+            notebook_path: ./src/02-silver.py
+
+targets:
+  dev:
+    default: true
+    mode: development
+  prd:
+    mode: production
+    # En la práctica ambos ambientes se ejecutan con la identidad del alumno.
+    run_as:
+      user_name: ${workspace.current_user.userName}
