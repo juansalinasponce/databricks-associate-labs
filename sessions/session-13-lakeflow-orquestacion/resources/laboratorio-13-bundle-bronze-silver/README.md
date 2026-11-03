@@ -51,6 +51,8 @@ flowchart LR
 - Permiso de uso del catálogo y creación de schemas, volúmenes y tablas.
 - Compute serverless para notebooks y Jobs, con cuota disponible.
 - Para la opción A: creación o edición de Bundles y despliegue habilitados.
+- Para PRD: permiso para crear carpetas y escribir dentro de `/Workspace/producción`;
+  si hace falta, el instructor prepara esa carpeta y los permisos de cada participante.
 - Elegir un identificador propio, por ejemplo `alumno01`, en minúsculas y sin
   espacios, guiones ni tildes. En un workspace compartido cada persona usa uno diferente.
 
@@ -125,8 +127,11 @@ Son volúmenes administrados. No necesitas configurar AWS ni un External Locatio
 
 Los parámetros del Job llegan a los widgets de ambos notebooks. Con ellos se
 construye `s13_<participante>_<ambiente>`. La misma lógica procesa ambos destinos.
-`workspace.root_path` separa los archivos y el estado del despliegue por usuario
-y target. `mode: production` expresa un modo de despliegue; los schemas los crean
+`workspace.root_path` separa los archivos y el estado del despliegue. DEV usa la
+carpeta personal; PRD sobrescribe esa configuración para desplegar en
+`/Workspace/producción/<usuario>/sesion13-polizas`. La subcarpeta de usuario evita
+que los participantes compartan el estado de un mismo despliegue.
+`mode: production` expresa un modo de despliegue; los schemas los crean
 los pasos SQL y las tablas se crean al ejecutar los notebooks.
 
 **Orden de tareas:** `bronze → silver`. Es un Job con notebooks; este ejemplo
@@ -150,8 +155,28 @@ las tablas.** Para este ejemplo no configures clúster clásico ni programación
 
 1. Selecciona **prd** en el target del Bundle y despliega.
 2. Ejecuta el Job de ese target.
-3. En Catalog comprueba que aparecen `bronze_polizas` y `silver_polizas` dentro
+3. En **Workspace → producción → tu usuario → sesion13-polizas**, comprueba los
+   archivos desplegados. Los notebooks se encuentran dentro de `files/src`.
+4. En Catalog comprueba que aparecen `bronze_polizas` y `silver_polizas` dentro
    de `s13_alumno01_prd`, además de las tablas que ya existen en DEV.
+
+El YAML que define esta ubicación es:
+
+```yaml
+targets:
+  prd:
+    mode: production
+    workspace:
+      root_path: /Workspace/producción/${workspace.current_user.userName}/${bundle.name}
+```
+
+Este fragmento explica la ruta; usa el `databricks.yml` completo para desplegar.
+La carpeta contiene código y estado del Bundle. El Job se consulta desde
+**Jobs & Pipelines**; las tablas y los archivos CSV siguen en Catalog y Volumes.
+
+Si ya habías desplegado PRD con la ruta anterior, cambiar `root_path` también
+cambia la ubicación del estado: puede crear un nuevo Job en vez de actualizar
+el anterior. Revisa ambos despliegues antes de retirar el antiguo.
 
 Se despliega el mismo código; cada ejecución lee el archivo del Volume de su
 ambiente. No se copian las tablas de DEV a PRD. Si tu interfaz solo permite

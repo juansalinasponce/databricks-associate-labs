@@ -9,7 +9,7 @@ variables:
     description: Identificador propio, en minúsculas, sin espacios ni tildes.
     default: alumno01
 
-# Cada participante y target conserva sus propios archivos y estado de despliegue.
+# DEV usa la carpeta personal; PRD define su propia ruta en targets.prd.workspace.
 workspace:
   root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
 
@@ -48,6 +48,8 @@ targets:
     mode: development
   prd:
     mode: production
+    workspace:
+      root_path: /Workspace/producción/${workspace.current_user.userName}/${bundle.name}
     # En la práctica ambos ambientes se ejecutan con la identidad del alumno.
     run_as:
       user_name: ${workspace.current_user.userName}
