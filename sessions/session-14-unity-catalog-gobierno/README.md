@@ -6,12 +6,35 @@ como imágenes.
 
 - [Laboratorio: permisos, revocación y gobierno paso a paso](resources/laboratorio-14-gobierno/README.md).
 - [Ejercicio de grupos: agregar integrantes, conceder y revocar](resources/laboratorio-14-gobierno/GRUPOS.md).
+- [Cierre: solo la vista para juan.salinas@atokongo.com y conexión a Power BI Desktop](resources/laboratorio-14-gobierno/USUARIO_PRUEBA.md).
+- [SQL para dejar los permisos mínimos de consumo](resources/laboratorio-14-gobierno/sql/04_publicar_vista_powerbi.sql).
 - [Descargar el laboratorio completo en ZIP](resources/laboratorio-14-gobierno.zip).
 - [SQL de preparación](resources/laboratorio-14-gobierno/sql/00_preparar_datos.sql).
 - [SQL del instructor: conceder, revocar y revisar herencia](resources/laboratorio-14-gobierno/sql/01_administrar_permisos.sql).
 - [Consultas del analista para comprobar el acceso](resources/laboratorio-14-gobierno/sql/02_validar_analista.sql).
 - [Plantilla de evidencias](resources/laboratorio-14-gobierno/EVIDENCIAS.md).
 - [Guía del instructor y resultados esperados](resources/laboratorio-14-gobierno/INSTRUCTOR.md).
+
+**Cierre vigente solicitado por el docente:** el laboratorio termina con la
+vista Gold conectada a Power BI Desktop en Windows utilizando la identidad
+`juan.salinas@atokongo.com`. El usuario conserva lectura de esa vista mediante
+el grupo `s14_alumno01_analistas` y CAN USE del SQL Warehouse; Silver permanece
+restringida. El bloque base dura 70 minutos y el cierre, 30: 100 minutos en total.
+Grupos con dos integrantes y Volumes quedan como materiales complementarios.
+
+## Orden de ejecución revisado
+
+| Archivo | Quién lo utiliza | Cómo se ejecuta |
+| --- | --- | --- |
+| `00_preparar_datos.sql` | Propietario | Una sola vez; si los datos ya están cargados, no repetir. |
+| `01_administrar_permisos.sql` | Propietario | Por etapas A–G, esperando cada prueba del analista. |
+| `02_validar_analista.sql` | juan.salinas@atokongo.com | Intercalado con cada etapa de 01; lecturas y errores esperados por separado. |
+| `03_grupos.sql` | Administrador e integrantes | Complementario; si retira a Juan del grupo, reincorporarlo antes del cierre. |
+| `04_publicar_vista_powerbi.sql` | Propietario y después Juan | Ajustar permisos como propietario; probar Gold/Silver como Juan; terminar la conexión siguiendo la guía Power BI. |
+
+La ruta vigente es `00 → (01 ↔ 02) → 04 → Power BI`. El 03 puede realizarse
+antes del 04 como práctica adicional. La numeración no indica una secuencia
+automática para ejecutar todos los archivos con la misma identidad.
 
 ## Relación con la PPT
 

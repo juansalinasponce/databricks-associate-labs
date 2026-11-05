@@ -5,7 +5,8 @@
 - Módulo: gobierno de datos, seguridad y Unity Catalog; sesión según la PPT del docente.
 - Tema: ciclo de vida de acceso y descubrimiento de activos.
 - Tipo: `GUIDED` + `PRACTICE`; formativo, sin calificación oficial.
-- Duración estimada: **70 minutos**; extensión opcional de Volumes: 15 minutos.
+- Duración estimada: **70 minutos de base + 30 de cierre en Power BI = 100 minutos**.
+  Grupos con dos integrantes y Volumes son complementos fuera de esta ruta.
 - Nivel: fundamental a intermedio.
 - Modalidad: `PRACTICO_CONDICIONAL` para permisos con dos identidades;
   `PRACTICO_FREE` para SQL y exploración sobre objetos propios;
@@ -18,6 +19,16 @@ Materiales: [SQL de preparación](sql/00_preparar_datos.sql),
 [SQL del propietario](sql/01_administrar_permisos.sql),
 [SQL del analista](sql/02_validar_analista.sql),
 [evidencias](EVIDENCIAS.md) y [guía del instructor](INSTRUCTOR.md).
+
+**Cierre vigente:** [vista autorizada para juan.salinas@atokongo.com y Power BI Desktop](USUARIO_PRUEBA.md),
+reutilizando `s14_alumno01_gobierno` y el
+[SQL de permisos mínimos](sql/04_publicar_vista_powerbi.sql). El laboratorio
+termina con la vista cargada en Power BI y conserva el acceso de lectura.
+
+**Orden:** ejecuta `00` una vez; alterna cada etapa del `01` con las pruebas del
+`02` desde la identidad de Juan; completa `04` y la conexión Power BI.
+`03` es complementario. Si lo realizas y retiras a Juan del grupo, reincorpóralo
+antes del `04`; conceder permisos al grupo no modifica sus integrantes.
 
 Complemento solicitado: [S14-G01 — Acceso mediante un grupo](GRUPOS.md),
 30 minutos para crear un grupo de cuenta y comparar membresía con revocación.
@@ -307,6 +318,16 @@ diferente de una denegación explícita; el propietario debe confirmar que exist
 Entrega [EVIDENCIAS.md](EVIDENCIAS.md) con las pruebas B, C, E y G, una ficha
 de gobierno y una captura o diagrama de lineage. Indica qué fue real, demo o
 simulado. El instructor usa [INSTRUCTOR.md](INSTRUCTOR.md) para revisar el resultado.
+
+### Cierre vigente — Vista gobernada en Power BI — 30 min
+
+Continúa con [USUARIO_PRUEBA.md](USUARIO_PRUEBA.md). Retira permisos amplios
+de las pruebas previas, conserva únicamente lectura de la vista entre los datos
+del laboratorio y CAN USE del warehouse, y conecta Power BI Desktop como
+`juan.salinas@atokongo.com`. Comprueba Gold legible, Silver denegada y dos filas
+en Power BI. Ese es el estado final: no retires la membresía ni revoques el
+SELECT de Gold después de completar la conexión. Los apartados opcionales
+siguientes son material de consulta y no forman parte de esta ruta de cierre.
 
 ## Extensión opcional — Volumes DEV/PRD y relación con S3 — 15 min
 

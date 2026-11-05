@@ -1,10 +1,12 @@
 -- Databricks notebook source
 -- MAGIC %md
 -- MAGIC # Validar desde la identidad del analista
+-- MAGIC Usuario de prueba actual: juan.salinas@atokongo.com; confirma ese correo con current_user().
 -- MAGIC Abre tu propio SQL Editor o importa este notebook en tu sesión del mismo workspace.
 -- MAGIC No uses la identidad del creador, un Job que ejecute como propietario ni resultados compartidos.
 -- MAGIC Sustituye `workspace` y `alumno01`. Ejecuta cada consulta por separado.
 -- MAGIC Repite las consultas tras cada etapa A–G del instructor y registra resultado e identidad.
+-- MAGIC Se alterna con 01_administrar_permisos.sql, no se ejecuta únicamente al finalizarlo.
 -- MAGIC Los errores de autorización esperados son evidencia; no uses Run all.
 
 -- COMMAND ----------

@@ -2,6 +2,7 @@
 -- MAGIC %md
 -- MAGIC # Administrar permisos por etapas — propietario / instructor
 -- MAGIC **No ejecutar todo.** Detente después de cada etapa y espera la prueba del analista.
+-- MAGIC Este archivo se alterna con 02_validar_analista.sql; no son dos ejecuciones completas consecutivas.
 -- MAGIC Cambia `workspace`, `alumno01` y `s14_alumno01_analistas` en todo el archivo.
 -- MAGIC El principal debe existir: grupo de cuenta del laboratorio o usuario del mismo entorno.
 -- MAGIC El analista no debe ser propietario, administrador ni recibir permisos amplios por otros grupos.

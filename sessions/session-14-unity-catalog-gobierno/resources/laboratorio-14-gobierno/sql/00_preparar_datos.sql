@@ -3,6 +3,7 @@
 -- MAGIC # Preparar los activos de gobierno
 -- MAGIC Ejecuta como propietario. Sustituye `workspace` y `alumno01` en todo el archivo.
 -- MAGIC Usa un schema nuevo por pareja. Si ya existe, elige otro sufijo: no borres objetos ajenos.
+-- MAGIC Ejecutar una sola vez. Si ya completaste el setup, continuar con 01; no repetir el INSERT.
 -- MAGIC Dataset sintético; no representa datos ni reglas internas de La Positiva.
 
 -- COMMAND ----------

@@ -59,3 +59,20 @@ escribe **predicción**, sin presentarla como una denegación aplicada por Datab
 - ¿Por qué revocar sobre la tabla no retiró el acceso heredado?:
 - ¿Un tag descriptivo enmascara datos automáticamente? Explica:
 - ¿Qué permiso temporal retiraste y cuál conservaste?:
+
+## Cierre vigente — Power BI Desktop
+
+- Usuario de Databricks utilizado por la conexión: juan.salinas@atokongo.com.
+- Grupo confirmado: s14_alumno01_analistas.
+- CAN USE del SQL Warehouse verificado:
+- Vista conectada: workspace.s14_alumno01_gobierno.gold_siniestros_resumen.
+- Resultado de nueva consulta a Gold desde el usuario:
+- Mensaje de acceso denegado a Silver y evidencia de identidad:
+- Permisos amplios de pruebas anteriores encontrados y retirados:
+- Método de conexión: Databricks / OAuth; modo Import.
+- Captura de las dos filas en Power BI:
+- Totales verificados: 6 siniestros / 3000.00 PEN.
+- Estado final: usuario en el grupo, lectura de la vista y uso del warehouse conservados.
+- Modalidad del cierre: conexión real / demo / pendiente por entorno.
+
+No incluir credenciales, tokens ni secretos en las capturas.

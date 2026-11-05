@@ -6,6 +6,8 @@
 -- MAGIC Usa el grupo s14_alumno01_analistas del laboratorio principal. Si ya existe, no lo vuelvas a crear.
 -- MAGIC Si en tu entorno tiene otro nombre, reemplázalo en todos los GRANT, REVOKE y comprobaciones.
 -- MAGIC No se crean grupos mediante GRANT. El propietario administra datos; el administrador de identidades mantiene integrantes.
+-- MAGIC Este ejercicio es complementario: para el cierre actual puedes pasar de 01/02 a 04.
+-- MAGIC Si usas a Juan en el papel de Ana y lo retiras del grupo, reincorpóralo antes de 04.
 
 -- COMMAND ----------
 

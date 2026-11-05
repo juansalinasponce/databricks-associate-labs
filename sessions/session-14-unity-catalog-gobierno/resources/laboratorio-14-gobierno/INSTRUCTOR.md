@@ -1,5 +1,12 @@
 # Guía del instructor — Laboratorio 14
 
+El cierre vigente está en [USUARIO_PRUEBA.md](USUARIO_PRUEBA.md):
+juan.salinas@atokongo.com consume solo Gold desde Power BI Desktop en Windows;
+la cuenta original conserva el ownership. Usa
+[04_publicar_vista_powerbi.sql](sql/04_publicar_vista_powerbi.sql) para inspeccionar
+y retirar accesos amplios de las pruebas previas. Verifica workspace, CAN USE
+del warehouse, membresía, Gold legible y Silver denegada antes de conectar Power BI.
+
 El complemento [S14-G01 — Grupos](GRUPOS.md) incorpora creación del grupo,
 altas y bajas de integrantes y revocación para el equipo, con
 [SQL separado](sql/03_grupos.sql). Prepara acceso al workspace y compute
@@ -7,9 +14,10 @@ independiente del grupo para que las bajas permitan seguir probando consultas.
 
 ## Preparación antes de la clase
 
-Reserva 70 minutos para el laboratorio. La extensión de Volumes añade 15
-minutos si el ritmo de la sesión lo permite. La preparación de identidades y
-permisos iniciales se realiza antes de la clase, fuera de esos tiempos.
+Reserva 70 minutos para el bloque base y 30 para el cierre en Power BI: 100
+minutos en total. La preparación de identidades y permisos iniciales se realiza
+antes de la clase. El ejercicio ampliado de grupos y Volumes queda como consulta
+complementaria, fuera de la ruta vigente de cierre.
 
 1. Confirma catálogo, SQL Warehouse disponible y creación de objetos administrados.
 2. Usa dos identidades del mismo entorno. La segunda debe poder ejecutar SQL
@@ -44,6 +52,7 @@ cuentas personales en workspaces distintos tampoco permiten esta validación.
 | 40–50 | Herencia D–G | «¿De dónde viene ahora el acceso que sigue funcionando?» |
 | 50–65 | Contexto y lineage | «¿Quién aprueba el uso y qué se afecta si cambio monto_pagado?» |
 | 65–70 | Evidencias y transferencia | «¿Qué acceso temporal retiramos?» |
+| 70–100 | Permisos finales y Power BI | «El consumidor conecta solo la vista con su propia identidad.» |
 
 En SQL Editor selecciona y ejecuta una sentencia o etapa a la vez. Al importar
 los archivos como notebooks SQL, conserva las celdas `-- COMMAND ----------`.
@@ -112,6 +121,13 @@ No marcar «revocación real lograda» basándose solo en SHOW GRANTS o en una
 predicción. Registrar qué comportamiento fue observado.
 
 ## Retiro de accesos al terminar
+
+**Para el cierre vigente en Power BI se conserva la membresía del usuario y
+SELECT sobre Gold.** No ejecutes las revocaciones siguientes al terminar la
+conexión; corresponden solo a una retirada posterior del acceso temporal.
+El laboratorio finaliza con las dos filas cargadas, Gold legible y Silver
+denegada para la identidad consumidora. Import almacena una copia en Power BI;
+no uses un reporte ya cargado como evidencia de una revocación posterior.
 
 El final G mantiene lectura del resumen para reutilizarlo. Si el grupo era
 temporal y ya no lo necesita, el propietario puede retirar solo sus concesiones

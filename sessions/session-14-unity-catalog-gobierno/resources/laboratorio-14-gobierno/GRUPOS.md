@@ -1,5 +1,12 @@
 # S14-G01 — Acceso a indicadores mediante un grupo
 
+Este ejercicio es complementario. El cierre vigente solicitado utiliza
+`juan.salinas@atokongo.com` y termina al conectar solo la vista de `gobierno`
+a [Power BI Desktop](USUARIO_PRUEBA.md), conservando la lectura. Si antes
+realizas este ejercicio de grupos, usa ese usuario en el papel de Ana y
+aplica después el ajuste de permisos del cierre. Luis es opcional para observar
+el efecto sobre dos personas.
+
 ## Metadata
 
 - Módulo: gobierno de datos y Unity Catalog; complemento solicitado para la sesión 14.
