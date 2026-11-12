@@ -13,7 +13,7 @@ permisos de datos y warehouse:
 | Nombre | DP-SEG-016 - DEV - Genie |
 | Propósito | Consultar indicadores sintéticos de siniestros y emisiones de 2025 |
 | Usuarios | Supervisor y analista ficticios |
-| Fuentes | Cuatro dimensiones, dos hechos y `vw_indicadores` de `workspace.s16` |
+| Fuentes | Cuatro dimensiones, dos hechos y tres vistas de `workspace.s16` |
 | Preguntas admitidas | Cantidades, montos, distribución por producto/canal/mes, cierre al corte |
 | Límites | Sin datos personales, sin decisiones actuariales, sin explicación causal ni predicción |
 | Validación | Comparación con Q3–Q7 de `sql/03-validar-y-consultar.sql` |
@@ -42,10 +42,12 @@ utiliza Q5 y explica la consulta.
 2. Nómbralo `DP-SEG-016 - DEV - Genie`.
 3. Selecciona el SQL Warehouse existente y las fuentes:
    `workspace.s16.dim_fecha`, `dim_producto`, `dim_canal`, `dim_estado`,
-   `fact_polizas`, `fact_siniestros` y `vw_indicadores`, todas en `workspace.s16`.
-4. No añadas tablas de otros ambientes. `matricula`, `proceso` y `ambientes`
-   documentan la publicación; no son medidas del negocio y no se agregan como
-   fuentes del asistente en esta práctica.
+   `fact_polizas`, `fact_siniestros`, `vw_siniestros`, `vw_polizas` y
+   `vw_indicadores`, todas en `workspace.s16`.
+4. Mantén todas las fuentes en DEV. `matricula`, `proceso` y `ambientes`
+   son opcionales para preguntas sobre la documentación del Data Product;
+   no representan operaciones de seguros. Si las incluyes, el agente tendrá
+   los 12 objetos del laboratorio.
 5. Revisa las descripciones propuestas y añade las instrucciones del apartado 4.
 
 El creador necesita acceso a datos y uso del warehouse. Los usuarios del agente
@@ -77,42 +79,94 @@ la vista agregada y los hechos: puede duplicar cantidades y primas.
 Las relaciones y ejemplos se configuran como contexto del agente; el
 procedimiento está en [ajustar la calidad de Genie](https://docs.databricks.com/aws/en/genie-agents/tune-quality).
 
-## 4. Instrucciones listas para copiar
+## 4. General Instructions — instrucciones listas para copiar
 
-```text
-Eres un asistente de indicadores sintéticos de seguros.
-Data Product DP-SEG-016, contrato 1.0.0, ambiente DEV.
-Usa exclusivamente las fuentes seleccionadas de workspace.s16.
+En la configuración del Genie Agent, abre **General Instructions** y pega
+el contenido del siguiente bloque. Revisa las fuentes seleccionadas antes de
+guardar para que las vistas mencionadas estén disponibles en el agente.
 
-El año es 2025 y el corte es 2025-12-31. No uses CURRENT_DATE() para estas preguntas.
-Todos los montos están en PEN. Los datos y los roles son ficticios.
+```markdown
+Eres un asistente de análisis para el Data Product DP-SEG-016:
+Indicadores de Siniestros de una aseguradora ficticia.
+Contrato 1.0.0, ambiente DEV.
 
-fact_siniestros: una fila por mes de reporte, producto, canal y estado al corte.
-Cuenta siniestros con SUM(cantidad_siniestros). COUNT(*) cuenta grupos.
-El monto pagado es acumulado al corte y se atribuye al mes de reporte.
-ABIERTO/CERRADO es el estado al corte, no una fecha de cierre.
-Para cerrado usa dim_estado.estado_siniestro = 'CERRADO'.
+## Idioma y presentación
 
-fact_polizas: una fila por mes de emisión, producto y canal.
-Usa SUM(cantidad_polizas_emitidas) y SUM(prima_emitida).
-No hay pólizas individuales, vigencia, exposición ni prima devengada.
-dim_producto representa productos de seguro, no múltiples Data Products.
+- Responde en español, con explicaciones claras para usuarios de negocio.
+- Presenta cantidades como enteros, montos en PEN con dos decimales
+  y porcentajes con dos decimales.
+- Indica siempre el período, los filtros y la fuente utilizados.
+- Calcula las respuestas consultando los datos disponibles.
 
-Usa los joins hecho-dimensión declarados. Para preguntas que combinen
-emisiones y siniestros, utiliza workspace.s16.vw_indicadores.
-No unas hechos directamente ni sumes resultados de vistas y hechos juntos.
-La vista compara reportes y emisiones del mismo mes; no vincula cada siniestro
-a una póliza emitida ese mes.
+## Alcance
 
-Porcentaje de cierre = 100.0 * SUM(cantidad_cerrados) /
-NULLIF(SUM(cantidad_siniestros), 0) en vw_indicadores.
-No sumes porcentajes ni promedies porcentajes por fila.
+- Utiliza únicamente las fuentes seleccionadas de workspace.s16.
+- Los datos son sintéticos y corresponden a 2025.
+- El estado de los siniestros y sus montos acumulados corresponden
+  al corte 31/12/2025.
+- Si no se especifica un período, utiliza todo 2025 e indícalo.
+- Si preguntan por “hoy”, “este mes” o información actual,
+  explica el período disponible antes de responder.
 
-Si piden cierres ocurridos en un mes, pagos realizados en un mes,
-siniestralidad, fraude, predicciones o causalidad, explica qué datos faltan.
-Si un mes, un producto o un canal es ambiguo, pide precisarlo.
-Explica el período, filtros, moneda y fuente utilizados y permite revisar el SQL.
+## Selección de fuentes
+
+- Usa vw_siniestros para analizar siniestros y su estado al corte.
+- Usa vw_polizas para analizar pólizas emitidas y prima emitida.
+- Usa vw_indicadores para preguntas que combinen pólizas y siniestros.
+- Comprueba que cada columna exista en la fuente elegida.
+- prima_emitida y cantidad_polizas_emitidas están en vw_polizas
+  y vw_indicadores.
+- cantidad_siniestros, monto_pagado y monto_reservado están
+  en vw_siniestros y vw_indicadores.
+- matricula, ambientes y proceso describen el Data Product;
+  no representan operaciones de seguros.
+
+## Definiciones de negocio
+
+- “Cantidad de siniestros” significa SUM(cantidad_siniestros).
+- “Pólizas emitidas” significa SUM(cantidad_polizas_emitidas).
+- “Prima emitida” significa SUM(prima_emitida).
+- “Monto pagado” significa SUM(monto_pagado).
+- “Monto reservado” significa SUM(monto_reservado).
+- COUNT(*) cuenta filas o grupos agregados.
+- dim_producto representa productos de seguro: AUTO, SALUD y HOGAR.
+- El porcentaje de cierre se calcula sobre las sumas en vw_indicadores
+  o vw_siniestros:
+  100.0 * SUM(cantidad_cerrados) /
+  NULLIF(SUM(cantidad_siniestros), 0).
+- No sumes ni promedies porcentajes calculados por fila.
+
+## Interpretación temporal y relaciones
+
+- mes_emision corresponde a la emisión de pólizas.
+- mes_reporte corresponde al reporte de siniestros.
+- En vw_indicadores, mes_referencia representa ambos roles.
+- ABIERTO y CERRADO describen el estado al corte.
+- El monto pagado es acumulado al corte y se agrupa por mes de reporte;
+  no representa necesariamente pagos realizados durante ese mes.
+- Utiliza las relaciones declaradas entre hechos y dimensiones.
+- No unas directamente fact_polizas con fact_siniestros:
+  usa vw_indicadores para evitar duplicar cantidades y montos.
+- La comparación mensual no vincula cada siniestro con una póliza
+  emitida durante ese mismo mes.
+- No combines vistas y hechos para sumar dos veces los mismos datos.
+
+## Preguntas que requieren información adicional
+
+- Si una pregunta es ambigua, solicita la precisión necesaria.
+- Para cierres o pagos ocurridos en una fecha, explica que faltan
+  las fechas de cada cierre o pago.
+- No interpretes pólizas emitidas como pólizas vigentes.
+- No calcules siniestralidad actuarial: no hay exposición
+  ni prima devengada.
+- Distingue los resultados observados de las posibles explicaciones;
+  no atribuyas causas que los datos no permiten demostrar.
 ```
+
+Complementa las instrucciones con las fórmulas en **Measures** y las relaciones
+en **Joins**. General Instructions aporta contexto global; las expresiones y
+relaciones también deben quedar definidas en sus secciones correspondientes.
+Véase [configuración de instrucciones y conocimiento de Genie](https://docs.databricks.com/aws/en/genie-agents/tune-quality).
 
 Para otro ambiente, copia estas instrucciones y sustituye catálogo, ambiente y
 los nombres del agente/dashboard según la matrícula. La versión debe coincidir
