@@ -1,0 +1,2 @@
+codigo_proceso,codigo_dp,nombre,entrada,pasos,salida,ejecucion,responsable
+PRC-SEG-016,DP-SEG-016,Publicación de indicadores de seguros,"Hojas de matrícula, dimensiones y hechos de este Excel",Validar contrato → exportar SQL → crear s16 → cargar → publicar vistas → verificar KPIs,<catalogo>.s16.vw_indicadores; Genie; AI/BI Dashboard,Manual para la clase; sin Job ni programación activa,Ingeniería de datos demo

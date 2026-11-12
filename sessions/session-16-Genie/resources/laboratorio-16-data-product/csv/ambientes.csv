@@ -1,0 +1,5 @@
+codigo_dp,ambiente,catalogo,esquema,habilitado,nombre_genie,nombre_dashboard
+DP-SEG-016,DEV,workspace,s16,SI,DP-SEG-016 - DEV - Genie,DP-SEG-016 - DEV - Dashboard
+DP-SEG-016,TEST,seguros_test,s16,NO,DP-SEG-016 - TEST - Genie,DP-SEG-016 - TEST - Dashboard
+DP-SEG-016,UAT,seguros_uat,s16,NO,DP-SEG-016 - UAT - Genie,DP-SEG-016 - UAT - Dashboard
+DP-SEG-016,PRD,seguros_prd,s16,NO,DP-SEG-016 - PRD - Genie,DP-SEG-016 - PRD - Dashboard
